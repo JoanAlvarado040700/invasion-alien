@@ -20,6 +20,7 @@ def run_game():
         while True:
         #Escucha los eventos de teclado o raaton
             event.verificar_evento(nave)
+            nave.update()
 
         #Actualizar pantalla
             event.actualizar_pantalla(conf, pantalla, nave)

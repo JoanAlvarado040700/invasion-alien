@@ -7,9 +7,19 @@ def verificar_evento(nave):
         for event in pygame.event.get():
                     if event.type == pygame.QUIT:
                         sys.exit()
+                    #verifica que el jugador tenga precionada la tecla derecha
                     elif event.type == pygame.KEYDOWN:
                         if event.key == pygame.K_RIGHT:
-                            nave.rect.centerx +=1
+                            nave.moving_right = True
+                        elif event.key == pygame.K_LEFT:
+                            nave.moving_left = True
+
+                    elif event.type == pygame.KEYUP:
+                        if event.key == pygame.K_RIGHT:
+                            nave.moving_right = False
+                        elif event.key == pygame.K_LEFT:
+                            nave.moving_left = False
+
 
     except pygame.error as e:
         print("Error: ",e)
