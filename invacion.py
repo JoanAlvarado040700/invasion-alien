@@ -1,7 +1,8 @@
-import sys 
 import pygame as gamer
 from config import Configuraciones
 from nave import Nave
+import eventos as event
+
 
 
 def run_game():
@@ -14,24 +15,16 @@ def run_game():
         gamer.display.set_caption("Invacion aliens")
         #Crear una nave
         nave = Nave(pantalla)
-    except gamer.error as e:
-            print("Error: ",e)
 
     #Inicia el bucle del juego
-    try:
         while True:
-            #Escucha los eventos de teclado o raaton
-            for event in gamer.event.get():
-                if event.type == gamer.QUIT:
-                    sys.exit()
+        #Escucha los eventos de teclado o raaton
+            event.verificar_evento(nave)
 
-            #Se le pasa el color al objeto pantalla 
-            pantalla.fill(conf.bg_color)
-            nave.blitme()
-            #hacer visible la pantalla dibujada recientemente.
-            gamer.display.flip()
+        #Actualizar pantalla
+            event.actualizar_pantalla(conf, pantalla, nave)
     except gamer.error as e:
-        print("error: ",e)
+        print("Se ha encontrado un error:  ",e)
 
 
 
