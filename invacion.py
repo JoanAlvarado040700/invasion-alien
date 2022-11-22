@@ -14,7 +14,7 @@ def run_game():
         conf.screen_widh, conf.screen_height))
         gamer.display.set_caption("Invacion aliens")
         #Crear una nave
-        nave = Nave(pantalla)
+        nave = Nave(conf, pantalla)
 
     #Inicia el bucle del juego
         while True:

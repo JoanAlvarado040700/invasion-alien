@@ -1,10 +1,11 @@
 import pygame 
 
 class Nave():
-    def __init__(self, pantalla):
+    def __init__(self,conf, pantalla):
         #iniciar la nave y erstablecer 
         try:
             self.pantalla = pantalla
+            self.conf = conf
             
             #cargar la imagen de la nave y obtiene su rect
             self.imagen = pygame.image.load("img/nave_1.bmp")
@@ -14,6 +15,9 @@ class Nave():
             #Empieza cada nueva nave en la parte inferior central de la pantalla
             self.rect.centerx = self.pantalla_rect.centerx
             self.rect.bottom = self.pantalla_rect.bottom
+
+            #Almacenar un valor decimal para el centro de la nave
+            self.center = float(self.rect.centerx)
 
             #Bander de moviminetos
             self.moving_right = False
@@ -28,8 +32,11 @@ class Nave():
 
     def update(self):
         #Actualiza la posicion de la nave segun la Bandera de movimiento
-        if self.moving_right:
-            self.rect.centerx +=1
-            
-        if self.moving_left:
-            self.rect.centerx -=1
+        if self.moving_right and self.rect.right < self.pantalla_rect.right:
+            self.center += self.conf.velocidad_nave
+
+        if self.moving_left and self.rect.left > 0:
+            self.center -= self.conf.velocidad_nave
+
+        #Actualiza el objeto rect
+        self.rect.centerx = self.center

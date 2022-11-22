@@ -1,26 +1,32 @@
 import sys
 import pygame
 
+def evento_keydown(event, nave):
+    #Respomde a las pulsaciones de teclas 
+    if event.key == pygame.K_RIGHT:
+        nave.moving_right = True
+    elif event.key == pygame.K_LEFT:
+        nave.moving_left = True
+
+def evento_keyUp(event, nave):
+    if event.key == pygame.K_RIGHT:
+        nave.moving_right = False
+    elif event.key == pygame.K_LEFT:
+        nave.moving_left = False    
+
+
 def verificar_evento(nave):
     #Responder a las pulsaciones y a los eventos del Raton
     try:
         for event in pygame.event.get():
-                    if event.type == pygame.QUIT:
-                        sys.exit()
+            if event.type == pygame.QUIT:
+                sys.exit()
                     #verifica que el jugador tenga precionada la tecla derecha
-                    elif event.type == pygame.KEYDOWN:
-                        if event.key == pygame.K_RIGHT:
-                            nave.moving_right = True
-                        elif event.key == pygame.K_LEFT:
-                            nave.moving_left = True
-
-                    elif event.type == pygame.KEYUP:
-                        if event.key == pygame.K_RIGHT:
-                            nave.moving_right = False
-                        elif event.key == pygame.K_LEFT:
-                            nave.moving_left = False
-
-
+            elif event.type == pygame.KEYDOWN:
+                    evento_keydown(event, nave)
+            elif event.type == pygame.KEYUP:
+                        evento_keyUp(event, nave)
+                        
     except pygame.error as e:
         print("Error: ",e)
         
