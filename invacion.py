@@ -2,6 +2,7 @@ import pygame as gamer
 from config import Configuraciones
 from nave import Nave
 import eventos as event
+from pygame.sprite import Group 
 
 
 
@@ -16,14 +17,17 @@ def run_game():
         #Crear una nave
         nave = Nave(conf, pantalla)
 
+        #Crea un grupo paera almacenar las balar
+        balas = Group()
+
     #Inicia el bucle del juego
         while True:
         #Escucha los eventos de teclado o raaton
-            event.verificar_evento(nave)
+            event.verificar_evento(conf, pantalla,nave, balas)
             nave.update()
-
+            balas.update()
         #Actualizar pantalla
-            event.actualizar_pantalla(conf, pantalla, nave)
+            event.actualizar_pantalla(conf, pantalla, nave, balas)
     except gamer.error as e:
         print("Se ha encontrado un error:  ",e)
 

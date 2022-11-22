@@ -19,4 +19,14 @@ class Balas(Sprite):
         self.color = conf.bala_color
         self.factor_velocidad = conf.bala_factor_velocidad
 
-        #
+    def update(self):
+        #Actualiza la posicion decimal de la bala 
+        self.y -= self.factor_velocidad
+        
+        #Actualiza la posicion del rect 
+        self.rect.y = self.y
+
+    def draw_bala(self):
+        #Dibuja la bala en la pantalla
+        pygame.draw.rect(self.pantalla, self.color, self.rect)
+
